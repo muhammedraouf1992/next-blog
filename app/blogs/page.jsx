@@ -1,5 +1,5 @@
 import React from "react";
-import getAllPosts from "../lib/query";
+import { getAllPosts } from "../lib/query";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -8,18 +8,18 @@ const AllBlogs = async () => {
   const postsArray = posts.nodes;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-5  max-w-4xl mx-auto py-3">
       {postsArray.map((p) => (
-        <div key={p.title}>
-          <div>
+        <div key={p.title} className="grid grid-cols-5 gap-5">
+          <div className="col-span-2">
             <Image
-              className="h-full object-cover"
+              className="rounded-lg"
               src={p.featuredImage.node.mediaDetails.sizes[1].sourceUrl}
               width={p.featuredImage.node.mediaDetails.sizes[1].width}
               height={p.featuredImage.node.mediaDetails.sizes[1].height}
             />
           </div>
-          <div>
+          <div className="col-span-3 flex flex-col ">
             <Link href={`/blogs/${p.slug}`}>
               <h1 className="text-blue-500 text-2xl  hover:text-blue-700 duration-200">
                 {p.title}
