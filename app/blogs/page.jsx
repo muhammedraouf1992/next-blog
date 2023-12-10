@@ -6,7 +6,6 @@ import Image from "next/image";
 const AllBlogs = async () => {
   const posts = await getAllPosts();
   const postsArray = posts.nodes;
-  console.log(posts.nodes[0].featuredImage);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -14,6 +13,7 @@ const AllBlogs = async () => {
         <div key={p.title}>
           <div>
             <Image
+              className="h-full object-cover"
               src={p.featuredImage.node.mediaDetails.sizes[1].sourceUrl}
               width={p.featuredImage.node.mediaDetails.sizes[1].width}
               height={p.featuredImage.node.mediaDetails.sizes[1].height}
@@ -32,7 +32,7 @@ const AllBlogs = async () => {
             <div className="my-5">
               posted uder
               {p.categories.nodes.map((tag) => (
-                <Link href={`/category/${tag.name}`}>
+                <Link href={`/category/${tag.name}`} key={tag.name}>
                   <span
                     key={tag.name}
                     className="rounded-full bg-blue-500 text-white py-2 px-3 hover:bg-blue-700 duration-200 mx-2 capitalize"
